@@ -148,7 +148,7 @@ footer nav a:hover {
     }
 }
 
-/* Responsive para móviles */
+/* Para móviles */
 @media (max-width: 576px) {
     .grid {
         grid-template-columns: 1fr;
