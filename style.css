@@ -1,3 +1,18 @@
+:root {
+    --color-principal: #BF9FFF;
+    --color-secundario: #eb5adf;
+    --color-fondo: #000;
+    --color-header-footer: #2E1A47;
+    --color-card: #1a1a1a;
+    --color-texto-secundario: #ccc;
+    --sombra-card: rgba(0, 0, 0, 0.25);
+    --radio-card: 12px;
+    --fuente-principal: 'Segoe UI', sans-serif;
+    --gap-grid: 20px;
+    --padding-main: 2rem;
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -6,17 +21,16 @@
 
 body {
     min-height: 100vh;
-    font-family: 'Segoe UI', sans-serif;
-    color: #BF9FFF;
-    background: #000;
+    font-family: var(--fuente-principal);
+    color: var(--color-principal);
+    background: var(--color-fondo);
     display: flex;
     flex-direction: column;
 }
 
-
 header {
-    background: #2E1A47;
-    padding: 20px;
+    background: var(--color-header-footer);
+    padding: 1.5rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -27,58 +41,153 @@ header {
     width: auto;
 }
 
-
 nav ul {
     display: flex;
-    gap: 40px;
+    gap: 2.5rem;
     list-style: none;
 }
 
 nav a {
-    color: #BF9FFF;
-    font-size: 18px;
+    color: var(--color-principal);
+    font-size: 1.1rem;
     text-decoration: none;
-    transition: color 0.2s;
+    position: relative;
+    transition: color 0.3s;
+}
+
+/* Subrayado animado */
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--color-secundario);
+    transition: width 0.3s;
 }
 
 nav a:hover {
-    color: #eb5adf;
+    color: var(--color-secundario);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+.portada {
+    position: relative;
+    width: 100%;
+    height: 70vh;    /* ocupa 70% de la altura de la pantalla */
+    overflow: hidden;
+}
+
+.portada img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* ajusta la imagen al contenedor */
+}
+
+.portada-texto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-principal);
+    text-align: center;
+}
+
+.portada-texto h1 {
+    font-size: 4rem;
+    color: var(--color-principal);
+    text-align: center;
+    text-shadow:
+        0 0 5px var(--color-principal),
+        0 0 10px var(--color-header-footer),
+        0 0 20px var(--color-secundario),
+        0 0 30px var(--color-secundario);
+}
+
+.portada-texto p {
+    font-size: 1.5rem;
+    color: var(--color-principal);
+    text-align: center;
+    text-shadow:
+        0 0 3px var(--color-header-footer),
+        0 0 6px var(--color-secundario),
+        0 0 10px var(--color-principal);
 }
 
 
 main {
     flex: 1;
-    padding: 40px 20px 20px 20px;
+    padding: var(--padding-main);
 }
 
-
 .cajas {
-    margin-bottom: 40px;
+    margin-bottom: 3rem;
 }
 
 .cajas h2 {
-    margin-bottom: 30px;
+    margin-bottom: 1.5rem;
+    font-size: clamp(2rem, 2vw, 2rem);
+    position: relative;
 }
 
+/* la linea que sale bajo títulos */
+.cajas h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--color-secundario);
+    margin-top: 8px;
+    border-radius: 2px;
+}
 
+/* GRID DE TARJETAS */
 .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    margin-bottom: 30px;
+    gap: var(--gap-grid);
+    margin-bottom: 2rem;
 }
 
 .card {
-    background: #1a1a1a;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    background: var(--color-card);
+    border-radius: var(--radio-card);
+    box-shadow: 0 4px 12px var(--sombra-card);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 10px;
+    padding: 1.5rem 1rem;
     text-align: center;
-    transition: transform 0.2s;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+}
 
+/* el brillo que pasa al card que vimos en clase */
+.card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(183, 139, 215, 0.15) 0%, transparent 70%);
+    transform: rotate(45deg) translateX(-100%);
+    transition: transform 0.5s;
+}
+
+.card:hover::before {
+    transform: rotate(45deg) translateX(100%);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px var(--sombra-card);
 }
 
 .card img {
@@ -86,76 +195,131 @@ main {
     height: 180px;
     object-fit: contain;
     border-radius: 8px;
-    margin-bottom: 10px;
-    display: block;
+    margin-bottom: 0.5rem;
     filter: drop-shadow(2px -1px 1px black);
 }
 
-
 .card h3 {
-    font-size: 17px;
+    font-size: 1.05rem;
     margin-bottom: 0;
-    color: #BF9FFF;
+    color: var(--color-principal);
 }
 
-.sobremi {
-    background: #1a1a1a;
-    border-radius: 10px;
-    padding: 30px;
-    margin: 30px 0;
-}
-
-.sobremi h2 {
-    font-size: 28px;
-    margin-bottom: 10px;
-}
-
-.sobremi p {
-    font-size: 16px;
-    color: #ccc;
-    line-height: 1.5;
-}
-
-
-footer {
-    background: #2E1A47;
-    padding: 40px 0 0 0;
-    text-align: center;
-    color: #BF9FFF;
-}
-
-footer nav ul {
-    display: flex;
-    gap: 30px;
-    list-style: none;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-footer nav a {
+a {
     text-decoration: none;
-    color: #BF9FFF;
-    font-weight: 500;
+    color: inherit;
+    transition: color 0.3s;
 }
 
-footer nav a:hover {
-    color: #9665FF;
+
+/* empieza sobre mi y srvicios */
+
+.sobremi,
+.servicios {
+    background: var(--color-card);
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 2rem 0;
 }
 
-/* Responsive para tablets */
+.sobremi h2,
+.servicios h2 {
+    font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.sobremi h2::after,
+.servicios h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--color-secundario);
+    margin-top: 8px;
+    border-radius: 2px;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--color-secundario);
+    transition: width 0.3s;
+}
+
+nav a:hover {
+    color: var(--color-secundario);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+
+.sobremi p,
+.servicios p {
+    font-size: 1rem;
+    color: var(--color-texto-secundario);
+    line-height: 1.6;
+}
+
+
+/* ========================
+   FOOTER
+======================== */
+footer {
+    background: var(--color-header-footer);
+    padding: 2.5rem 0 1rem 0;
+    text-align: center;
+    color: var(--color-principal);
+}
+
+.logos-footer ul {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.logos-footer ul i {
+    color: var(--color-principal);
+    font-size: 1.8rem;
+    transition: transform 0.3s, color 0.3s, text-shadow 0.3s;
+    cursor: pointer; /* indica que se puede interactuar */
+}
+
+.logos-footer ul i:hover {
+    color: var(--color-secundario);
+    transform: scale(1.2);
+    text-shadow: 
+        0 0 5px var(--color-secundario),
+        0 0 10px var(--color-secundario),
+        0 0 15px var(--color-secundario),
+        0 0 20px var(--color-secundario);
+}
+
+
+/* ========================
+   RESPONSIVE
+======================== */
 @media (max-width: 992px) {
     .grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* Para móviles */
 @media (max-width: 576px) {
     .grid {
         grid-template-columns: 1fr;
     }
 
     main {
-        padding: 20px 10px;
+        padding: 1.25rem 0.5rem;
     }
 }
