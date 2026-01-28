@@ -77,8 +77,8 @@ nav a:hover::after {
 
 .portada {
     position: relative;
-    width: 100%;
-    height: 70vh;    /* ocupa 70% de la altura de la pantalla */
+    width: 100vw;
+    height: 90vh;    /* ocupa 70% de la altura de la pantalla */
     overflow: hidden;
 }
 
@@ -215,7 +215,7 @@ a {
 /* empieza sobre mi y srvicios */
 
 .sobremi,
-.servicios {
+.tecnologias {
     background: var(--color-card);
     border-radius: 10px;
     padding: 2rem;
@@ -223,14 +223,14 @@ a {
 }
 
 .sobremi h2,
-.servicios h2 {
+.tecnologias h2 {
     font-size: clamp(1.75rem, 2.5vw, 2.5rem);
     margin-bottom: 0.5rem;
     position: relative;
 }
 
 .sobremi h2::after,
-.servicios h2::after {
+.tecnologias h2::after {
     content: '';
     display: block;
     width: 60px;
@@ -260,11 +260,45 @@ nav a:hover::after {
 }
 
 
-.sobremi p,
-.servicios p {
+.tecnologias,.sobremi {
     font-size: 1rem;
     color: var(--color-texto-secundario);
     line-height: 1.6;
+}
+
+.slider {
+    width: 100%;
+    height: auto;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.slide-track {
+    display: flex;
+    width: calc(250px * 20); /* Ajusta según el número de iconos */
+    animation: scroll 40s linear infinite;
+}
+
+.slide {
+    width: 100px; /* Tamaño del icono */
+    margin: 0 40px;
+    display: flex;
+    align-items: center;
+}
+
+.slide svg {
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.slide svg:hover {
+    transform: scale(1.2); /* Se hace un poco más grande al pasar el ratón */
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-100px * 10)); } /* Ajusta según el número de iconos únicos */
 }
 
 
